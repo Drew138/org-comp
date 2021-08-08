@@ -1,0 +1,10 @@
+// circuito simplificado.
+CHIP Mux {
+	IN	a, b, sel;
+	OUT	out;
+	PARTS:
+		Nand (a=sel, b=sel, out=NSelOut);
+		Nand (a=a, b=NSelOut, out=NAOut);
+		Nand (a=sel, b=b, out=NBOut);
+        Nand(a=NAOut, b=NBOut, out=out);
+}

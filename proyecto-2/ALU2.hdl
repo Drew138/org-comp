@@ -1,0 +1,7 @@
+CHIP ALU2.hdl {
+    IN x, y, p, q, 
+    OUT out, ng, zr;
+    PARTS:
+        ALU()
+        ALU()
+}

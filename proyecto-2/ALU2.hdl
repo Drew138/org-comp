@@ -7,14 +7,14 @@ CHIP ALU2 {
         ALU(x=p, y=q, zx=zp, zy=zq, nx=np, ny=nq, f=f, no=no, out=out2, ng=ng2, zr=zr2);
         
         
-        And16(a=outm2, b=outm4, out=outand);
-        Add16(a=outm2, b=outm4, out=outadd);
+        And16(a=out1, b=out2, out=outand);
+        Add16(a=out1, b=out2, out=outadd);
 
-        Mux16(a=outand, b=outadd, sel=f, out=outmux5);
+        Mux16(a=outand, b=outadd, sel=f, out=outmux);
 
-        Not16(in=outmux5, out=notoutmux5);
+        Not16(in=outmux5, out=notoutmux);
 
-        Mux16(a=outmux5, b=notoutmux5, sel=no, out=out, out[0..7]=low, out[8..15]=high, out[15]=ng);
+        Mux16(a=outmux, b=notoutmux, sel=no, out=out, out[0..7]=low, out[8..15]=high, out[15]=ng);
 
         Or8Way(in=low, out=or1);
         Or8Way(in=high, out=or2);

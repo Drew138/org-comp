@@ -3,5 +3,5 @@ CHIP ALU2.hdl {
     OUT out, ng, zr;
     PARTS:
         ALU()
-        ALU()
+        
 }

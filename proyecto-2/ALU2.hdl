@@ -5,8 +5,10 @@ CHIP ALU2 {
 
         Mux4Way16(a=x, b=y, c=p, d=q, sel=m1, out=in1);
         Mux4Way16(a=x, b=y, c=p, d=q, sel=m2, out=in2);
-        ALU(x=in1, y=in2, zx=z[0], zy=z[1], nx=n[0], ny=n[1], f=f, no=no, out=out1, ng=ng1, zr=zr1);
-        ALU(x=in1, y=in2, zx=z[0], zy=z[1], nx=n[0], ny=n[1], f=f, no=no, out=out2, ng=ng2, zr=zr2);
+        DMux16(in=in1, sel=sel, a=dm1a, b=dm1b);
+        DMux16(in=in2, sel=sel, a=dm2a, b=dm2b);
+        ALU(x=dm1a, y=dm2a, zx=z[0], zy=z[1], nx=n[0], ny=n[1], f=f, no=no, out=out1, ng=ng1, zr=zr1);
+        ALU(x=dm1b, y=dm2b, zx=z[0], zy=z[1], nx=n[0], ny=n[1], f=f, no=no, out=out2, ng=ng2, zr=zr2);
         Mux16(a=out1, b=out2, sel=sel, out=out);
         Mux(a=ng1, b=ng2, sel=sel, out=ng);
         Mux(a=zr1, b=zr2, sel=sel, out=zr);

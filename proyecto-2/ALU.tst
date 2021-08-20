@@ -1,6 +1,6 @@
 load ALU.hdl,
 output-file ALU.out,
-output-list x%B3.1.3 y%B3.1.3 nx%B3.1.3 ny%B3.1.3 zx%B3.1.3 zy%B3.1.3 f%B3.1.3 no%B3.1.3 out%B3.1.3,
+output-list x%B3.16.3 y%B3.16.3 nx%B3.16.3 ny%B3.16.3 zx%B3.16.3 zy%B3.16.3 f%B3.16.3 no%B3.16.3 out%B3.16.3,
 
 set x %B0000000000000101,
 set y %B0000000000000111,

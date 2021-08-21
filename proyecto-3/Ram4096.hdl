@@ -1,0 +1,15 @@
+CHIP Ram4096.hdl {
+	IN load, address[12], in[16];
+	OUT out[16];
+	PARTS:
+		DMux8Way(in=load, sel=address[0..2], a=r0, b=r1, c=r2, d=r3, e=r4, f=r5, g=r6, h=r7);
+		Ram512(load=r0, address=address[3..11], in=in, out=out0);
+		Ram512(load=r1, address=address[3..11], in=in, out=out1);
+		Ram512(load=r2, address=address[3..11], in=in, out=out2);
+		Ram512(load=r3, address=address[3..11], in=in, out=out3);
+		Ram512(load=r4, address=address[3..11], in=in, out=out4);
+		Ram512(load=r5, address=address[3..11], in=in, out=out5);
+		Ram512(load=r6, address=address[3..11], in=in, out=out6);
+		Ram512(load=r7, address=address[3..11], in=in, out=out7);
+		Mux8Way16(a=out0, b=out1, c=out2, d=out3, e=out4, f=out5, g=out6, h=out7);
+}

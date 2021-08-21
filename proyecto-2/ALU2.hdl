@@ -2,7 +2,6 @@ CHIP ALU2 {
     IN x[16], y[16], p[16], q[16], m1[2], m2[2], z[2], n[2], f, no, sel; 
     OUT out[16], ng, zr;
     PARTS:
-
         Mux4Way16(a=x, b=y, c=p, d=q, sel=m1, out=in1);
         Mux4Way16(a=x, b=y, c=p, d=q, sel=m2, out=in2);
         DMux16(in=in1, sel=sel, a=dm1a, b=dm1b);
@@ -12,6 +11,4 @@ CHIP ALU2 {
         Mux16(a=out1, b=out2, sel=sel, out=out);
         Mux(a=ng1, b=ng2, sel=sel, out=ng);
         Mux(a=zr1, b=zr2, sel=sel, out=zr);
-        
-
 }

@@ -1,4 +1,4 @@
-CHIP Ram16384.hdl {
+CHIP Ram16384{
 	IN load, address[15], in[16];
 	OUT out[16];
 	PARTS:

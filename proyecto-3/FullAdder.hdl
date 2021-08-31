@@ -1,0 +1,8 @@
+CHIP FullAdder {
+    IN a, b, c;
+    OUT out, carry;
+    PARTS:
+        HalfAdder(a=a, b=b, out=temp, carry=carryTemp);
+        HalfAdder(a=c, b=temp, out=out, carry=carryTemp2);
+        Or(a=carryTemp, b=carryTemp2, out=carry);
+}

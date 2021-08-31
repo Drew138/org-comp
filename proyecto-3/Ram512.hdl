@@ -1,4 +1,4 @@
-CHIP Ram512.hdl {
+CHIP Ram512 {
 	IN load, address[9], in[16];
 	OUT out[16];
 	PARTS:

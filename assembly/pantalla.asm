@@ -1,0 +1,10 @@
+@SCREEN
+D=A
+@posicion
+M=D-1
+
+(LEERTECLADO)
+@KBD
+D=M
+BLACKEN
+D;JGT

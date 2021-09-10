@@ -14,7 +14,7 @@ D=M
 M=D
 
 
-@97
+@65
 D=A
 @current_key
 D=D-M
@@ -22,7 +22,7 @@ D=D-M
 D;JEQ
 
 
-@110
+@78
 D=A
 @current_key
 D=D-M
@@ -31,7 +31,7 @@ D;JEQ
 
 
 
-@100
+@68
 D=A
 @current_key
 D=D-M
@@ -69,7 +69,7 @@ M=D
 //
 
 
-@512 // jump to next line
+@544 // jump to next line
 D=A
 @tmp
 D=D+M
@@ -113,7 +113,7 @@ M=D
 //
 
 
-@512 // jump to next line
+@544 // jump to next line
 D=A
 @tmp
 D=D+M
@@ -153,7 +153,7 @@ M=D
 //
 
 
-@512 // jump to next line
+@544 // jump to next line
 D=A
 @tmp
 D=D+M

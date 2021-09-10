@@ -82,18 +82,12 @@ D;JEQ
 @8
 D=A
 @y
-D=M+D
-M=D
+DM=M-D
 
 
-@255
-D=A
-
-@y
-D=M-D
 
 @PASS_Y_UP
-D;JLT
+D;JGT
 @256 // go back to top
 D=A
 @position

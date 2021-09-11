@@ -24,9 +24,22 @@ A=M
 M=-1
 
 @posicion
-D=M+1
+M=M+1
+
+@24576
+D=A
 @posicion
-M = D
+D=D-M
+@SKIP
+D;JGE
+@24576
+D=A
+@posicion
+M=D
+(SKIP)
+
+// @posicion
+// M = D
 
 @LEERTECLADO
 0;JMP
@@ -47,6 +60,13 @@ M=0
 D=M-1
 @posicion
 M=D
+
+
+
+
+
+
+(SKIP)
 
 @LEERTECLADO
 0;JMP

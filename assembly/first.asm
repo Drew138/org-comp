@@ -1,12 +1,5 @@
-
-
-
-
-
-// put bitmap location value in R12
-// put code return address in R13
-@SCREEN
-D=A
+@position
+D=M
 @R12
 AD=D+M
 // row 1
@@ -399,6 +392,3 @@ D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=A-D // RAM[addr]=-val
 // return
-@R13
-A=M
-D;JMP

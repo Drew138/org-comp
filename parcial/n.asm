@@ -1,9 +1,9 @@
 @position
-D=A
+D=M
 @R12
 AD=D+M
 // row 1
-@3087 // A holds val
+@6172 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -11,7 +11,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3087 // A holds val
+@6172 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -19,7 +19,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3103 // A holds val
+@6204 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -27,7 +27,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3099 // A holds val
+@6204 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -35,7 +35,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3123 // A holds val
+@6252 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -43,7 +43,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3123 // A holds val
+@6252 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -51,7 +51,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3171 // A holds val
+@6348 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -59,7 +59,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3171 // A holds val
+@6348 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -67,7 +67,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3267 // A holds val
+@6540 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -75,7 +75,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3267 // A holds val
+@6540 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -83,7 +83,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3459 // A holds val
+@6924 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -91,7 +91,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3459 // A holds val
+@6924 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -99,7 +99,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3843 // A holds val
+@7692 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -107,7 +107,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3843 // A holds val
+@7692 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -115,7 +115,7 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3587 // A holds val
+@7180 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
@@ -123,8 +123,8 @@ M=D-A // RAM[addr] = val
 D=A // D holds previous addr
 @32
 AD=D+A
-@3587 // A holds val
+@7180 // A holds val
 D=D+A // D = addr + val
 A=D-A // A=addr + val - val = addr
 M=D-A // RAM[addr] = val
-// return
+

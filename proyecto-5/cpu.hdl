@@ -1,0 +1,57 @@
+CHIP cpu {
+    IN 
+    OUT  
+    PARTS:
+        Or(a=instruction[15], b=false, out=typeC);
+        Not(in=instruction[15], out=typeA);
+
+        // Register A
+        And(a=typeC, b=instruction[5], out=typeCWriteA);
+        Or(a=typeA, b=typeCWriteA, out=loadA);
+        
+        Mux16(a=instruction, b=outALU, sel=typeCWriteA, out=goARegister);
+        ARegister(in=goARegister, load=loadA, out=[0..14]=address, out=outARegister);
+
+
+        // Register D
+        And(a=typeC, b=instruction[4], out=loadD);
+        DRegister(in=outAlu, load=loadD, out=outDRegister);
+
+
+        // Mux entrada ALU
+        Mux16(a=outARegister, b=inM, sel=instruction[12], out=outAOrM);
+
+
+        ALU(x=outDRegister, 
+        y=outAOrM, 
+        zx=instruction[11], 
+        nx=instruction[10], 
+        zy=instruction[9], 
+        ny=instruction[8], 
+        f=instruction[7], 
+        no=instruction[6], 
+        out=outM, 
+        zr=isZeroOut, 
+        ng=isNotOut);
+
+        // jump y pc
+        Not(in=isNotOut,out=isNotNotOut);
+        Not(in=isZeroOut, out=itNotZeroOut);
+        And(a=isNotNotOut, b=isNotZeroOut, out=isPositive);
+
+
+        And(a=typeC, b=instruction[3], out=writeM);
+
+
+        // Jump
+        And(a=isPositive, b=instruction[0], out=JGT);
+        And(a=isZeroOut, b=instruction[1], out=JEQ);
+        And(a=isNotOut, b=instruction[2], out=JLT);
+
+        Or(a=JEQ, b=JLT, out=JLE);
+        Or(a=JLE, b=JGT, out=jumpA);
+        And(a=typeC, b=jumpA, out=loadPC);
+        Not(in=loadPC, out=incrementPC);
+        Pc(in=outARegister, load=loadPC, inc=incrementPC, reset=reset, out[0..14]=pc);
+        
+}

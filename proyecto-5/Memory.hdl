@@ -1,0 +1,8 @@
+CHIP Memory {
+	IN in[16], load, address[15];
+	OUT out[16];
+	PARTS:
+		RAM16K(in=in, address=,load=,out=);
+		Screen(in=in, address=,load=,out);
+		Keyboard(out=);
+}

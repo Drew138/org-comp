@@ -1,6 +1,13 @@
 CHIP cpu {
-    IN 
-    OUT  
+    IN  inM[16],         
+        instruction[16], 
+        reset;           
+
+    OUT outM[16],        
+        writeM,          
+        addressM[15],    
+        pc[15];
+
     PARTS:
         Or(a=instruction[15], b=false, out=typeC);
         Not(in=instruction[15], out=typeA);
@@ -10,7 +17,7 @@ CHIP cpu {
         Or(a=typeA, b=typeCWriteA, out=loadA);
         
         Mux16(a=instruction, b=outALU, sel=typeCWriteA, out=goARegister);
-        ARegister(in=goARegister, load=loadA, out=[0..14]=address, out=outARegister);
+        ARegister(in=goARegister, load=loadA, out=[0..14]=addressM, out=outARegister);
 
 
         // Register D
@@ -53,5 +60,4 @@ CHIP cpu {
         And(a=typeC, b=jumpA, out=loadPC);
         Not(in=loadPC, out=incrementPC);
         Pc(in=outARegister, load=loadPC, inc=incrementPC, reset=reset, out[0..14]=pc);
-        
 }

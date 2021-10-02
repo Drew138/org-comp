@@ -1,0 +1,31 @@
+function multiplicacion 2 // dos parametros
+    push constant 0
+    pop local 0 // suma = 0
+    push argument 1 // x * y
+    pop local 1
+
+label loop
+
+    push constant 0
+    push local 1
+    eq
+    if-goto end
+    push local 0
+    push argument 0
+    add
+    push local 0
+    push local 1
+    push constant 1
+    sub
+    pop local 1 // j -= 1
+    goto loop
+
+label end
+    push local 0
+    return
+
+// programa 3 * 4
+push constant 3
+push constant 4
+call multiplicacion 2
+pop temp 1

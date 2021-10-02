@@ -1,0 +1,12 @@
+push constant 4
+pop static 0
+push constant 10
+pop static 1
+push constant 6
+pop static 2
+push static 0
+push static 1
+add
+push static 2
+sub
+pop local 0

@@ -5,4 +5,7 @@ CHIP Memory {
 		RAM16K(in=in, address=,load=,out=);
 		Screen(in=in, address=,load=,out);
 		Keyboard(out=);
+
+		//16384
+		//24576
 }

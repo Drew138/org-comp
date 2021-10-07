@@ -1,0 +1,32 @@
+function division.div 2
+    push constant 0
+    pop local 0
+    push argument 0
+    pop local 1
+    push argument 1
+    pop local 2
+
+label loop
+
+    push local 2
+    push local 1
+    gt
+    if-goto end
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    push local 2
+    push argument 1
+    add
+    pop local 2
+    goto loop
+
+label end
+    push local 0
+    return
+
+push constant 5
+push constant 2
+call division.div 2
+pop temp 0

@@ -1,4 +1,4 @@
-function multiplicacion 2 // dos parametros
+function multiplicacion.mult 2 // dos parametros
     push constant 0
     pop local 0 // suma = 0
     push argument 1 // x * y
@@ -10,10 +10,12 @@ label loop
     push local 1
     eq
     if-goto end
+
     push local 0
     push argument 0
     add
-    push local 0
+    pop local 0
+
     push local 1
     push constant 1
     sub
@@ -27,5 +29,5 @@ label end
 // programa 3 * 4
 push constant 3
 push constant 4
-call multiplicacion 2
+call multiplicacion.mult 2
 pop temp 1

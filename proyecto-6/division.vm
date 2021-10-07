@@ -3,23 +3,30 @@ function division.div 2
     pop local 0
     push argument 0
     pop local 1
+
+    push constant 0
     push argument 1
-    pop local 2
+    eq
+    if-goto end
 
 label loop
 
-    push local 2
     push local 1
-    gt
+    push argument 1
+    sub
+    pop local 1
+
+    push local 1
+    push constant 0
+    lt
     if-goto end
+
     push local 0
     push constant 1
     add
     pop local 0
-    push local 2
-    push argument 1
-    add
-    pop local 2
+
+
     goto loop
 
 label end

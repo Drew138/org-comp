@@ -1,4 +1,4 @@
-function factorial.mult 2 // dos parametros
+function raiz.mult 2 // dos parametros
     push constant 0
     pop local 0 // suma = 0
     push argument 1 // x * y
@@ -28,40 +28,33 @@ label end
     push local 0
     return
 
-function factorial.fact 1
-    push argument 0
+function raiz.root 1
     push constant 0
-    lt
-    if-goto
-
-    push argument 0
-    push constant 2
-    lt
-    if-goto retorna_1
-
-    push argument 0
     pop local 0
+
+label loop
+
     push local 0
     push constant 1
-    sub
-    pop local 1
-    push local 1
-    call factorial.fact 1
-    pop local 1
+    add
     push local 0
-    push local 1
-    call factorial.mult 2
-    return 
-
-label retorna_1
     push constant 1
-    return
-    
-label returna_0
-    push constant 0
+    add
+    call raiz.mult 2
+    push argument 0
+    gt 
+    if-goto end_raiz
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    goto loop
+
+label end_raiz
+    push local 0
     return
 
 
-push constant 3
-call factorial.fact 1
+push constant 20
+call raiz.root 1
 pop temp 0

@@ -1,0 +1,60 @@
+
+class JuegoCuadrado {
+   field Cuadrado cuadrado; // figura
+   field int direccion; // direccion de la figura
+
+   constructor JuegoCuadrado new() {
+      // crea un cuadrado de 30x30 en la esquina superior izquierda en la pantalla
+      let cuadrado = Cuadrado.new(0, 0, 30);
+      let direccion = 0;  // inicializa el movimiento
+      return this;
+   }
+
+   /** liberar memoria del juego */
+   method void dispose() {
+      do cuadrado.dispose();
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   /** movimientos del cuadrado */
+   method void moverCuadrado() {
+      if (direccion = 1) { do cuadrado.moverArriba(); }
+      if (direccion = 2) { do cuadrado.moverAbajo(); }
+      if (direccion = 3) { do cuadrado.moverIzq(); }
+      if (direccion = 4) { do cuadrado.moverDer(); }
+      do Sys.wait(5);  // espera de siguientes acciones
+      return;
+   }
+
+   method void run() {
+      var char key;  // tecla presionada
+      var boolean exit;
+      let exit = false;
+      
+      while (~exit) {
+         // ciclo espernado teclas
+         if (key = 0) {
+            let key = Keyboard.keyPressed();
+            do moverCuadrado();
+         }
+         if (key = 81)  { let exit = true; }     // tecla q para salir
+         if (key = 90)  { do cuadrado.reducir(); } // tecla z reducir cuadrado
+         if (key = 88)  { do cuadrado.ampliar(); } // tecla x ampliar cuadrado
+         if (key = 131) { let direccion = 1; }   // tecla flecha arriba
+         if (key = 133) { let direccion = 2; }   // tecla flecha abajo
+         if (key = 130) { let direccion = 3; }   // tecla izquierda
+         if (key = 132) { let direccion = 4; }   // tecla derecha
+
+         // Ciclo esperando liberar tecla para no hacer más funciones por error
+         while (~(key = 0)) {
+            let key = Keyboard.keyPressed();
+            do moverCuadrado();
+         }
+     } // while
+     return;
+   }
+}
+
+
+

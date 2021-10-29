@@ -1,0 +1,38 @@
+class Main {
+    
+    function String readAction() {
+        var char key;
+        let key = Keyboard.readChar();
+        if (key = 130) {
+            return "left\n";
+        } 
+        if (key = 131){
+            return "up\n";
+        } 
+        if (key = 132) {
+            return "right\n";
+        } 
+        if (key = 133) {
+            return "down\n";
+        } 
+        if (key = 140) {
+            return "ESC";
+        } 
+        return "";
+    }
+
+    function void main() {
+
+        var String action;
+
+        let action = Main.readAction();
+
+        while (~(action = "ESC")) {
+            if (~(action = "")) {
+                do Output.printString(action);
+            }
+            let action = Main.readAction();
+        }
+        return;
+    }
+}

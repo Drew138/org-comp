@@ -2,11 +2,14 @@ class Cuadrado {
 
    field int x, y; // posicion en pantalla
    field int tamano; // lado del cuadrado "tamaño"
+   field int direccion;
+   field boolean colliding;
 
-   constructor Cuadrado new(int valor_x, int valor_y, int valor_tamano) {
+   constructor Cuadrado new(int valor_x, int valor_y, int valor_tamano, int direc) {
       let x = valor_x;
       let y = valor_y;
       let tamano = valor_tamano;
+      let direccion = direc;
       do dibujar();
       return this;
    }
@@ -16,6 +19,145 @@ class Cuadrado {
       do Memory.deAlloc(this);
       return;
    }
+
+   method int getX() {
+      return x;
+   }
+
+   method y getY() {
+      return y;
+   }
+
+   method void colision() {
+      if (direccion = 1) { 
+         let direccion = 2;
+         return;
+      }
+      if (direccion = 2) { 
+         let direccion = 1;
+         return;
+      }
+      if (direccion = 3) { 
+         let direccion = 4;
+         return;
+      }
+      if (direccion = 4) { 
+         let direccion = 3;
+         return;
+      }
+      if (direccion = 5) { 
+         let direccion = 8;
+         return;
+      }
+      if (direccion = 6) { 
+         let direccion = 7;
+         return;
+      }
+      if (direccion = 7) { 
+         let direccion = 6;
+         return;
+      }
+      if (direccion = 8) { 
+         let direccion = 5;
+         return;
+      }
+      return;
+   }
+
+   method void mover() {
+      if (direccion = 1) { do moverArriba(); }
+      if (direccion = 2) { do moverAbajo(); }
+      if (direccion = 3) { do moverDer(); }
+      if (direccion = 4) { do moverIzq(); }
+      if (direccion = 5) { do moverArribaDer(); }
+      if (direccion = 6) { do moverArribaIzq(); }
+      if (direccion = 7) { do moverAbajoDer(); }
+      if (direccion = 8) { do moverAbajoIzq(); }
+      do Sys.wait(5);  // espera de siguientes acciones
+      return;
+   }
+
+   method boolean esChoque(int i , int j) {
+      var boolean vertical;
+      var boolean horizontal;
+      var boolean answer;
+      let vertical = ((((x + tamano) > i) | ((x + tamano) = i)) & ((x < i) | (x = i)));
+
+      let horizontal = ((((y + tamano) > j) | ((y + tamano) = j)) & ((y < j) | (y = j)));
+      let answer = (vertical & horizontal);
+      return answer;
+   }
+
+   method boolean revisarChoque(Cuadrado otro) {
+      var boolean uno;
+      var boolean dos;
+      var boolean tres;
+      var boolean cuatro;
+      var int tempX;
+      var int tempY;
+      let tempX = otro.getX();
+      let tempY = otro.getY();
+      let uno = esChoque(tempX + tamano, tempY);
+      let dos = esChoque(tempX, tempY + tamano);
+      let tres = esChoque(tempX, tempY);
+      let cuatro = esChoque(tempX + tamano, tempY + tamano);
+      return (uno | dos | tres | cuatro) ;
+   }
+   
+   method void rebote(int pared) {
+      if (direccion = 1) { 
+         let direccion = 2;
+         return;
+      }
+      if (direccion = 2) { 
+         let direccion = 1;
+         return;
+      }
+      if (direccion = 3) { 
+         let direccion = 4;
+         return;
+      }
+      if (direccion = 4) { 
+         let direccion = 3;
+         return;
+      }
+      if ((direccion = 5) & (pared = 1)) { 
+         let direccion = 7;
+         return;
+      }
+      if ((direccion = 5) & (pared = 2)) { 
+         let direccion = 6;
+         return;
+      }
+      if ((direccion = 6) & (pared = 1)) { 
+         let direccion = 8;
+         return;
+      }
+      if ((direccion = 6) & (pared = 4)) { 
+         let direccion = 5;
+         return;
+      }
+      if ((direccion = 7) & (pared = 2)) { 
+         let direccion = 8;
+         return;
+      }
+      if ((direccion = 7) & (pared = 3)) { 
+         let direccion = 5;
+         return;
+      }
+      if ((direccion = 8) & (pared = 3)) { 
+         let direccion = 6;
+         return;
+      }
+      if ((direccion = 8) & (pared = 4)) { 
+         let direccion = 7;
+         return;
+      }
+      return;
+   }
+
+
+
 
    /** dibujar la figura en pantalla */
    method void dibujar() {
@@ -57,9 +199,12 @@ class Cuadrado {
          do Screen.setColor(true);
          do Screen.drawRectangle(x, y, x + tamano, y + 1);
       }
+      if ((y = 1) | (y < 1)) {
+         do rebote(1);
+      }
       return;
    }
-
+   
    method void moverAbajo() {
       if ((y + tamano) < 254) {
          do Screen.setColor(false);
@@ -68,9 +213,12 @@ class Cuadrado {
          do Screen.setColor(true);
          do Screen.drawRectangle(x, (y + tamano) - 1, x + tamano, y + tamano);
       }
+      if (((y + tamano) = 254) | ((y + tamano) > 254)) {
+         do rebote(3);
+      }
       return;
    }
-
+   
    method void moverIzq() {
       if (x > 1) {
          do Screen.setColor(false);
@@ -79,9 +227,12 @@ class Cuadrado {
          do Screen.setColor(true);
          do Screen.drawRectangle(x, y, x + 1, y + tamano);
       }
+      if ((x = 1) | (x < 1)) {
+         do rebote(4);
+      }
       return;
    }
-
+   
    method void moverDer() {
       if ((x + tamano) < 510) {
          do Screen.setColor(false);
@@ -89,6 +240,108 @@ class Cuadrado {
          let x = x + 2;
          do Screen.setColor(true);
          do Screen.drawRectangle((x + tamano) - 1, y, x + tamano, y + tamano);
+      }
+      if (((x + tamano) = 510) | ((x + tamano) > 510)) {
+         do rebote(2);
+      }
+      return;
+   }
+   
+   method void moverArribaDer() {
+      
+      if ((y > 1) & ((x + tamano) < 510)) {
+         
+         do Screen.setColor(false);
+         do Screen.drawRectangle(x, (y + tamano) - 1, x + tamano, y + tamano);
+         let y = y - 2;
+         do Screen.setColor(true);
+         do Screen.drawRectangle(x, y, x + tamano, y + 1);
+         
+         do Screen.setColor(false);
+         do Screen.drawRectangle(x, y, x + 1, y + tamano);
+         let x = x + 2;
+         do Screen.setColor(true);
+         do Screen.drawRectangle((x + tamano) - 1, y, x + tamano, y + tamano);
+      }
+      if ((y = 1) | (y < 1)) {
+         do rebote(1);
+      }
+      if (((x + tamano) = 510) | ((x + tamano) > 510)) {
+         do rebote(2);
+      }
+      return;
+   }
+   
+   
+   method void moverArribaIzq() {
+      
+      
+      if ((y > 1) & (x > 1)){
+         do Screen.setColor(false);
+         do Screen.drawRectangle(x, (y + tamano) - 1, x + tamano, y + tamano);
+         let y = y - 2;
+         do Screen.setColor(true);
+         do Screen.drawRectangle(x, y, x + tamano, y + 1);
+         
+         do Screen.setColor(false);
+         do Screen.drawRectangle((x + tamano) - 1, y, x + tamano, y + tamano);
+         let x = x - 2;
+         do Screen.setColor(true);
+         do Screen.drawRectangle(x, y, x + 1, y + tamano);
+      }
+      if ((x = 1) | (x < 1)) {
+         do rebote(4);
+      }
+      if ((y = 1) | (y < 1)) {
+         do rebote(1);
+      }
+      return;
+   }
+   
+   method void moverAbajoDer() {
+      
+      if (((y + tamano) < 254) & ((x + tamano) < 510)){
+         do Screen.setColor(false);
+         do Screen.drawRectangle(x, y, x + tamano, y + 1);
+         let y = y + 2;
+         do Screen.setColor(true);
+         do Screen.drawRectangle(x, (y + tamano) - 1, x + tamano, y + tamano);
+         
+         do Screen.setColor(false);
+         do Screen.drawRectangle(x, y, x + 1, y + tamano);
+         let x = x + 2;
+         do Screen.setColor(true);
+         do Screen.drawRectangle((x + tamano) - 1, y, x + tamano, y + tamano);
+      }
+      if (((y + tamano) = 254) | ((y + tamano) > 254)) {
+         do rebote(3);
+      }
+      if (((x + tamano) = 510) | ((x + tamano) = 510)) {
+         do rebote(2);
+      }
+      return;
+   }
+   
+   method void moverAbajoIzq() {
+      
+      if (((y + tamano) < 254) & (x > 1)) {
+         do Screen.setColor(false);
+         do Screen.drawRectangle(x, y, x + tamano, y + 1);
+         let y = y + 2;
+         do Screen.setColor(true);
+         do Screen.drawRectangle(x, (y + tamano) - 1, x + tamano, y + tamano);
+
+         do Screen.setColor(false);
+         do Screen.drawRectangle((x + tamano) - 1, y, x + tamano, y + tamano);
+         let x = x - 2;
+         do Screen.setColor(true);
+         do Screen.drawRectangle(x, y, x + 1, y + tamano);
+      }
+      if (((y + tamano) = 254) | ((y + tamano) > 254)) {
+         do rebote(3);
+      }
+      if ((x = 1) | (x < 1)) {
+         do rebote(4);
       }
       return;
    }

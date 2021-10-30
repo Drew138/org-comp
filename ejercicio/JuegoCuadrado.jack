@@ -1,12 +1,13 @@
 
 class JuegoCuadrado {
-   field Cuadrado cuadrado; // figura
+   field Cuadrado cuadrado1; // figura
+   field Cuadrado cuadrado2; // figura
    field int direccion; // direccion de la figura
 
    constructor JuegoCuadrado new() {
       // crea un cuadrado de 30x30 en la esquina superior izquierda en la pantalla
-      let cuadrado = Cuadrado.new(0, 0, 30);
-      let direccion = 0;  // inicializa el movimiento
+      let cuadrado1 = Cuadrado.new(40, 100, 40, 5);
+      let cuadrado2 = Cuadrado.new(460, 120, 40, 8);
       return this;
    }
 
@@ -19,10 +20,16 @@ class JuegoCuadrado {
 
    /** movimientos del cuadrado */
    method void moverCuadrado() {
-      if (direccion = 1) { do cuadrado.moverArriba(); }
-      if (direccion = 2) { do cuadrado.moverAbajo(); }
-      if (direccion = 3) { do cuadrado.moverIzq(); }
-      if (direccion = 4) { do cuadrado.moverDer(); }
+      var boolean cond1;
+      var boolean cond2;
+      let cond1 = cuadrado1.revisarChoque(cuadrado2);
+      let cond2 = cuadrado2.revisarChoque(cuadrado1);
+      if (cond1 | cond2) {
+            do cuadrado1.colision();
+            do cuadrado2.colision();
+      }
+      do cuadrado1.mover();
+      do cuadrado2.mover();
       do Sys.wait(5);  // espera de siguientes acciones
       return;
    }
@@ -34,23 +41,24 @@ class JuegoCuadrado {
       
       while (~exit) {
          // ciclo espernado teclas
-         if (key = 0) {
-            let key = Keyboard.keyPressed();
-            do moverCuadrado();
-         }
-         if (key = 81)  { let exit = true; }     // tecla q para salir
-         if (key = 90)  { do cuadrado.reducir(); } // tecla z reducir cuadrado
-         if (key = 88)  { do cuadrado.ampliar(); } // tecla x ampliar cuadrado
-         if (key = 131) { let direccion = 1; }   // tecla flecha arriba
-         if (key = 133) { let direccion = 2; }   // tecla flecha abajo
-         if (key = 130) { let direccion = 3; }   // tecla izquierda
-         if (key = 132) { let direccion = 4; }   // tecla derecha
+         do moverCuadrado();
+         // if (key = 0) {
+         //    let key = Keyboard.keyPressed();
+         //    do moverCuadrado();
+         // }
+         // if (key = 81)  { let exit = true; }     // tecla q para salir
+         // if (key = 90)  { do cuadrado.reducir(); } // tecla z reducir cuadrado
+         // if (key = 88)  { do cuadrado.ampliar(); } // tecla x ampliar cuadrado
+         // if (key = 131) { let direccion = 1; }   // tecla flecha arriba
+         // if (key = 133) { let direccion = 2; }   // tecla flecha abajo
+         // if (key = 130) { let direccion = 3; }   // tecla izquierda
+         // if (key = 132) { let direccion = 4; }   // tecla derecha
 
-         // Ciclo esperando liberar tecla para no hacer más funciones por error
-         while (~(key = 0)) {
-            let key = Keyboard.keyPressed();
-            do moverCuadrado();
-         }
+         // // Ciclo esperando liberar tecla para no hacer más funciones por error
+         // while (~(key = 0)) {
+         //    let key = Keyboard.keyPressed();
+         //    do moverCuadrado();
+         // }
      } // while
      return;
    }

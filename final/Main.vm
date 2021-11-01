@@ -1,0 +1,11 @@
+function Main.main 1
+call JuegoVaqueros.new 0
+pop local 0
+push local 0
+call JuegoVaqueros.run 1
+pop temp 0
+push local 0
+call JuegoVaqueros.dispose 1
+pop temp 0
+push constant 0
+return

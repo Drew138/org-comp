@@ -1,0 +1,50 @@
+function JuegoVaqueros.new 0
+push constant 5
+call Memory.alloc 1
+pop pointer 0
+push constant 245
+push constant 10
+push constant 20
+call Vaquero.new 3
+pop this 0
+push constant 10
+push constant 117
+push constant 20
+call Vaquero.new 3
+pop this 1
+push constant 480
+push constant 117
+push constant 20
+call Vaquero.new 3
+pop this 2
+push constant 245
+push constant 224
+push constant 20
+call Vaquero.new 3
+pop this 3
+push pointer 0
+return
+function JuegoVaqueros.dispose 0
+push argument 0
+pop pointer 0
+call cuadrado.dispose 0
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function JuegoVaqueros.run 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+not
+not
+if-goto WHILE_END0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return

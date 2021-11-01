@@ -1,0 +1,1264 @@
+function Bala.new 0
+push constant 5
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 2
+pop this 2
+push argument 3
+pop this 3
+push pointer 0
+call Bala.dibujar 1
+pop temp 0
+push pointer 0
+return
+function Bala.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Bala.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Bala.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Bala.colision 0
+push argument 0
+pop pointer 0
+push this 3
+push constant 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 2
+pop this 3
+push constant 0
+return
+label IF_FALSE0
+push this 3
+push constant 2
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 1
+pop this 3
+push constant 0
+return
+label IF_FALSE1
+push this 3
+push constant 3
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 4
+pop this 3
+push constant 0
+return
+label IF_FALSE2
+push this 3
+push constant 4
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 3
+pop this 3
+push constant 0
+return
+label IF_FALSE3
+push this 3
+push constant 5
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 8
+pop this 3
+push constant 0
+return
+label IF_FALSE4
+push this 3
+push constant 6
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 7
+pop this 3
+push constant 0
+return
+label IF_FALSE5
+push this 3
+push constant 7
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 6
+pop this 3
+push constant 0
+return
+label IF_FALSE6
+push this 3
+push constant 8
+eq
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 5
+pop this 3
+push constant 0
+return
+label IF_FALSE7
+push constant 0
+return
+function Bala.mover 0
+push argument 0
+pop pointer 0
+push this 3
+push constant 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Bala.moverArriba 1
+pop temp 0
+label IF_FALSE0
+push this 3
+push constant 2
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+call Bala.moverAbajo 1
+pop temp 0
+label IF_FALSE1
+push this 3
+push constant 3
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+call Bala.moverDer 1
+pop temp 0
+label IF_FALSE2
+push this 3
+push constant 4
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+call Bala.moverIzq 1
+pop temp 0
+label IF_FALSE3
+push this 3
+push constant 5
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push pointer 0
+call Bala.moverArribaDer 1
+pop temp 0
+label IF_FALSE4
+push this 3
+push constant 6
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push pointer 0
+call Bala.moverArribaIzq 1
+pop temp 0
+label IF_FALSE5
+push this 3
+push constant 7
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push pointer 0
+call Bala.moverAbajoDer 1
+pop temp 0
+label IF_FALSE6
+push this 3
+push constant 8
+eq
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push pointer 0
+call Bala.moverAbajoIzq 1
+pop temp 0
+label IF_FALSE7
+push constant 5
+call Sys.wait 1
+pop temp 0
+push constant 0
+return
+function Bala.esChoque 3
+push argument 0
+pop pointer 0
+push this 0
+push this 2
+add
+push argument 1
+gt
+push this 0
+push this 2
+add
+push argument 1
+eq
+or
+push this 0
+push argument 1
+lt
+push this 0
+push argument 1
+eq
+or
+and
+pop local 0
+push this 1
+push this 2
+add
+push argument 2
+gt
+push this 1
+push this 2
+add
+push argument 2
+eq
+or
+push this 1
+push argument 2
+lt
+push this 1
+push argument 2
+eq
+or
+and
+pop local 1
+push local 0
+push local 1
+and
+pop local 2
+push local 2
+return
+function Bala.revisarChoque 6
+push argument 0
+pop pointer 0
+push argument 1
+call Cuadrado.getX 1
+pop local 4
+push argument 1
+call Cuadrado.getY 1
+pop local 5
+push pointer 0
+push local 4
+push this 2
+add
+push local 5
+call Bala.esChoque 3
+pop local 0
+push pointer 0
+push local 4
+push local 5
+push this 2
+add
+call Bala.esChoque 3
+pop local 1
+push pointer 0
+push local 4
+push local 5
+call Bala.esChoque 3
+pop local 2
+push pointer 0
+push local 4
+push this 2
+add
+push local 5
+push this 2
+add
+call Bala.esChoque 3
+pop local 3
+push local 0
+push local 1
+or
+push local 2
+or
+push local 3
+or
+return
+function Bala.rebote 0
+push argument 0
+pop pointer 0
+push this 3
+push constant 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 2
+pop this 3
+push constant 0
+return
+label IF_FALSE0
+push this 3
+push constant 2
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 1
+pop this 3
+push constant 0
+return
+label IF_FALSE1
+push this 3
+push constant 3
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 4
+pop this 3
+push constant 0
+return
+label IF_FALSE2
+push this 3
+push constant 4
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 3
+pop this 3
+push constant 0
+return
+label IF_FALSE3
+push this 3
+push constant 5
+eq
+push argument 1
+push constant 1
+eq
+and
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 7
+pop this 3
+push constant 0
+return
+label IF_FALSE4
+push this 3
+push constant 5
+eq
+push argument 1
+push constant 2
+eq
+and
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 6
+pop this 3
+push constant 0
+return
+label IF_FALSE5
+push this 3
+push constant 6
+eq
+push argument 1
+push constant 1
+eq
+and
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 8
+pop this 3
+push constant 0
+return
+label IF_FALSE6
+push this 3
+push constant 6
+eq
+push argument 1
+push constant 4
+eq
+and
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 5
+pop this 3
+push constant 0
+return
+label IF_FALSE7
+push this 3
+push constant 7
+eq
+push argument 1
+push constant 2
+eq
+and
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push constant 8
+pop this 3
+push constant 0
+return
+label IF_FALSE8
+push this 3
+push constant 7
+eq
+push argument 1
+push constant 3
+eq
+and
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push constant 5
+pop this 3
+push constant 0
+return
+label IF_FALSE9
+push this 3
+push constant 8
+eq
+push argument 1
+push constant 3
+eq
+and
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
+push constant 6
+pop this 3
+push constant 0
+return
+label IF_FALSE10
+push this 3
+push constant 8
+eq
+push argument 1
+push constant 4
+eq
+and
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
+push constant 7
+pop this 3
+push constant 0
+return
+label IF_FALSE11
+push constant 0
+return
+function Bala.dibujar 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Bala.borrar 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Bala.moverArriba 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+add
+push constant 1
+sub
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 1
+push constant 2
+sub
+pop this 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push constant 1
+add
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push this 1
+push constant 1
+eq
+push this 1
+push constant 1
+lt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push constant 1
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE1
+push constant 0
+return
+function Bala.moverAbajo 0
+push argument 0
+pop pointer 0
+push this 1
+push this 2
+add
+push constant 254
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push constant 1
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 1
+push constant 2
+add
+pop this 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+add
+push constant 1
+sub
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push this 1
+push this 2
+add
+push constant 254
+eq
+push this 1
+push this 2
+add
+push constant 254
+gt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push constant 3
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE1
+push constant 0
+return
+function Bala.moverIzq 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 2
+add
+push constant 1
+sub
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push constant 2
+sub
+pop this 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push constant 1
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push this 0
+push constant 1
+eq
+push this 0
+push constant 1
+lt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push constant 4
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE1
+push constant 0
+return
+function Bala.moverDer 0
+push argument 0
+pop pointer 0
+push this 0
+push this 2
+add
+push constant 510
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push constant 1
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push constant 2
+add
+pop this 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 2
+add
+push constant 1
+sub
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push this 0
+push this 2
+add
+push constant 510
+eq
+push this 0
+push this 2
+add
+push constant 510
+gt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push constant 2
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE1
+push constant 0
+return
+function Bala.moverArribaDer 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+gt
+push this 0
+push this 2
+add
+push constant 510
+lt
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+add
+push constant 1
+sub
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 1
+push constant 2
+sub
+pop this 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push constant 1
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push constant 1
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push constant 2
+add
+pop this 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 2
+add
+push constant 1
+sub
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push this 1
+push constant 1
+eq
+push this 1
+push constant 1
+lt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push constant 1
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE1
+push this 0
+push this 2
+add
+push constant 510
+eq
+push this 0
+push this 2
+add
+push constant 510
+gt
+or
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+push constant 2
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE2
+push constant 0
+return
+function Bala.moverArribaIzq 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+gt
+push this 0
+push constant 1
+gt
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+add
+push constant 1
+sub
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 1
+push constant 2
+sub
+pop this 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push constant 1
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 2
+add
+push constant 1
+sub
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push constant 2
+sub
+pop this 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push constant 1
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push this 0
+push constant 1
+eq
+push this 0
+push constant 1
+lt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push constant 4
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE1
+push this 1
+push constant 1
+eq
+push this 1
+push constant 1
+lt
+or
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+push constant 1
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE2
+push constant 0
+return
+function Bala.moverAbajoDer 0
+push argument 0
+pop pointer 0
+push this 1
+push this 2
+add
+push constant 254
+lt
+push this 0
+push this 2
+add
+push constant 510
+lt
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push constant 1
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 1
+push constant 2
+add
+pop this 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+add
+push constant 1
+sub
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push constant 1
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push constant 2
+add
+pop this 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 2
+add
+push constant 1
+sub
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push this 1
+push this 2
+add
+push constant 254
+eq
+push this 1
+push this 2
+add
+push constant 254
+gt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push constant 3
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE1
+push this 0
+push this 2
+add
+push constant 510
+eq
+push this 0
+push this 2
+add
+push constant 510
+eq
+or
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+push constant 2
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE2
+push constant 0
+return
+function Bala.moverAbajoIzq 0
+push argument 0
+pop pointer 0
+push this 1
+push this 2
+add
+push constant 254
+lt
+push this 0
+push constant 1
+gt
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push constant 1
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 1
+push constant 2
+add
+pop this 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+add
+push constant 1
+sub
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 2
+add
+push constant 1
+sub
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push constant 2
+sub
+pop this 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push constant 1
+add
+push this 1
+push this 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push this 1
+push this 2
+add
+push constant 254
+eq
+push this 1
+push this 2
+add
+push constant 254
+gt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push constant 3
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE1
+push this 0
+push constant 1
+eq
+push this 0
+push constant 1
+lt
+or
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+push constant 4
+call Bala.rebote 2
+pop temp 0
+label IF_FALSE2
+push constant 0
+return

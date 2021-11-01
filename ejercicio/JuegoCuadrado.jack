@@ -7,7 +7,7 @@ class JuegoCuadrado {
    constructor JuegoCuadrado new() {
       // crea un cuadrado de 30x30 en la esquina superior izquierda en la pantalla
       let cuadrado1 = Cuadrado.new(40, 100, 40, 5);
-      let cuadrado2 = Cuadrado.new(460, 120, 40, 8);
+      let cuadrado2 = Cuadrado.new(460, 120, 40, 3);
       return this;
    }
 

@@ -11,7 +11,7 @@ pop this 0
 push constant 460
 push constant 120
 push constant 40
-push constant 8
+push constant 3
 call Cuadrado.new 4
 pop this 1
 push pointer 0

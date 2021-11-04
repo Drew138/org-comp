@@ -93,4 +93,38 @@ class Vaquero {
       }
       return;
    }
+
+   method Bala disparoArriba() {
+      return Bala.new(x + (tamano / 2) - 10, y - 2, 20, 1);
+   }
+
+   method Bala disparoAbajo() {
+      return Bala.new(x + (tamano / 2) - 10, y + tamano + 2, 20, 2);
+   }
+
+   method Bala disparoDerecha() {
+      return Bala.new(x + tamano + 2, y + (tamano / 2) - 10, 20, 3);
+   }
+
+   method Bala disparoIzquierda() {
+      return Bala.new(x - 2, y + (tamano / 2) - 10, 20, 4);
+   }
+
+   method Bala disparoDerechaArriba() {
+      return Bala.new(x + tamano + 2, y + (tamano / 2) - 10, 20, 5);
+   }
+
+   method Bala disparoIzquierdaArriba() {
+      return Bala.new(x - 2, y + (tamano / 2) - 10, 20, 6);
+   }
+
+   method Bala disparoDerechaAbajo() {
+      return Bala.new(x + tamano + 2, y + (tamano / 2) - 10, 20, 7);
+   }
+
+   method Bala disparoIzquierdaAbajo() {
+      return Bala.new(x - 2, y + (tamano / 2) - 10,20, 8);
+   }
+
+
 }

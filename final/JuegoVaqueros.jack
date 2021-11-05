@@ -4,17 +4,15 @@ class JuegoVaqueros {
    field Vaquero vaquero2; // figura
    field Vaquero vaquero3; // figura
    field Vaquero vaquero4; // figura
-   field int direccion; // direccion de la figura
    field Bala[] balas; 
 
    constructor JuegoVaqueros new() {
       // crea un cuadrado de 30x30 en la esquina superior izquierda en la pantalla
-      // let cuadrado1 = Bala.new(40, 100, 40, 5);
-      // let cuadrado2 = Bala.new(460, 120, 40, 8);
       let vaquero1 = Vaquero.new(10, 117, 20, 1);
       let vaquero2 = Vaquero.new(480, 117, 20, 2);
       let vaquero3 = Vaquero.new(245, 10, 20, 3);
       let vaquero4 = Vaquero.new(245, 224, 20, 4);
+      let balas = Array.new(4);
       return this;
    }
 
@@ -26,29 +24,65 @@ class JuegoVaqueros {
    }
 
    method void revisarChoquesBalas() {
-
+      var int i;
+      var int j;
+      var Bala balaUno;
+      var Bala balaDos;
+      var boolean cond1;
+      var boolean cond2;
+      let i = 0;
+      while (i < 4) {
+         let j = i + 1;
+         while (j < 4) {
+            if ((~(balas[i] = null)) & (~(balas[j] = null))) {
+               let balaUno = balas[i];
+               let balaDos = balas[j];
+               let cond1 = balaUno.revisarChoque(cuadrado2);
+               let cond2 = balaDos.revisarChoque(cuadrado1);
+               if (cond1 | cond2) {
+                     do balaUno.colision();
+                     do balaDos.colision();
+               }
+            }
+            let j = j + 1;
+         }
+         let i = i + 1;
+      }
 
       return;
    }
 
    method void revisarChoquesVaqueros() {
 
-
+      var Bala bala;
+      var int i;
+      let i = 0;
+      while (i < 4) {
+         if (~(balas[i] = null)) {
+            let bala = balas[i];
+         }
+      }
       return;
    }
 
+   method void revisarChoques() {
+      revisarChoquesVaqueros();
+      revisarChoquesBalas();
+      return;
+   }
+
+
    /** movimientos del cuadrado */
-   method void moverCuadrado() {
-      // var boolean cond1;
-      // var boolean cond2;
-      // let cond1 = cuadrado1.revisarChoque(cuadrado2);
-      // let cond2 = cuadrado2.revisarChoque(cuadrado1);
-      // if (cond1 | cond2) {
-      //       do cuadrado1.colision();
-      //       do cuadrado2.colision();
-      // }
-      // do cuadrado1.mover();
-      // do cuadrado2.mover();
+   method void moverBalas() {
+      var Bala bala;
+      var int i;
+      let i = 0;
+      while (i < 4) {
+         if (~(balas[i] = null)) {
+            let bala = balas[i];
+            bala.mover();
+         }
+      }
       do Sys.wait(5);  // espera de siguientes acciones
       return;
    }
@@ -63,7 +97,8 @@ class JuegoVaqueros {
          do moverCuadrado();
          if (key = 0) {
             let key = Keyboard.keyPressed();
-            do moverCuadrado();
+            do revisarChoques();
+            do moverBalas();
          }
 
          if (key = 131) { do vaquero1.moverArriba(); }   // tecla flecha arriba
@@ -102,7 +137,8 @@ class JuegoVaqueros {
          // Ciclo esperando liberar tecla para no hacer más funciones por error
          while (~(key = 0)) {
             let key = Keyboard.keyPressed();
-            do moverCuadrado();
+            dov revisarChoques();
+            do moverBalas();
          }
      } // while
      return;

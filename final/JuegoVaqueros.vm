@@ -2,26 +2,33 @@ function JuegoVaqueros.new 0
 push constant 5
 call Memory.alloc 1
 pop pointer 0
-push constant 245
-push constant 10
-push constant 20
-call Vaquero.new 3
-pop this 0
 push constant 10
 push constant 117
 push constant 20
-call Vaquero.new 3
-pop this 1
+push constant 1
+call Vaquero.new 4
+pop this 0
 push constant 480
 push constant 117
 push constant 20
-call Vaquero.new 3
+push constant 2
+call Vaquero.new 4
+pop this 1
+push constant 245
+push constant 10
+push constant 20
+push constant 3
+call Vaquero.new 4
 pop this 2
 push constant 245
 push constant 224
 push constant 20
-call Vaquero.new 3
+push constant 4
+call Vaquero.new 4
 pop this 3
+push constant 4
+call Array.new 1
+pop this 4
 push pointer 0
 return
 function JuegoVaqueros.dispose 0
@@ -34,7 +41,1199 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-function JuegoVaqueros.run 2
+function JuegoVaqueros.revisarChoquesBalas 6
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 4
+lt
+not
+if-goto WHILE_END0
+push local 0
+push constant 1
+add
+pop local 1
+label WHILE_EXP1
+push local 1
+push constant 4
+lt
+not
+if-goto WHILE_END1
+push local 0
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 2
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 3
+push local 2
+push local 3
+call Bala.revisarChoque 2
+pop local 4
+push local 3
+push local 2
+call Bala.revisarChoque 2
+pop local 5
+push local 4
+push local 5
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 2
+call Bala.borrar 1
+pop temp 0
+push local 3
+call Bala.borrar 1
+pop temp 0
+push local 2
+call Bala.dispose 1
+pop temp 0
+push local 3
+call Bala.dispose 1
+pop temp 0
+push local 0
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 1
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE1
+label IF_FALSE0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function JuegoVaqueros.revisarChoquesVaqueros 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push constant 4
+lt
+not
+if-goto WHILE_END0
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push this 0
+push constant 0
+eq
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+push this 0
+call Bala.revisarChoqueVaquero 2
+pop local 2
+push local 2
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 0
+call Vaquero.borrar 1
+pop temp 0
+push this 0
+call Vaquero.dispose 1
+pop temp 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push local 1
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+pop this 0
+label IF_FALSE2
+label IF_FALSE1
+label IF_FALSE0
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push this 1
+push constant 0
+eq
+not
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push local 0
+push this 1
+call Bala.revisarChoqueVaquero 2
+pop local 2
+push local 2
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 1
+call Vaquero.borrar 1
+pop temp 0
+push this 1
+call Vaquero.dispose 1
+pop temp 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push local 1
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+pop this 1
+label IF_FALSE5
+label IF_FALSE4
+label IF_FALSE3
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push this 2
+push constant 0
+eq
+not
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push local 0
+push this 2
+call Bala.revisarChoqueVaquero 2
+pop local 2
+push local 2
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push this 2
+call Vaquero.borrar 1
+pop temp 0
+push this 2
+call Vaquero.dispose 1
+pop temp 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push local 1
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+pop this 2
+label IF_FALSE8
+label IF_FALSE7
+label IF_FALSE6
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push this 3
+push constant 0
+eq
+not
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
+push local 0
+push this 3
+call Bala.revisarChoqueVaquero 2
+pop local 2
+push local 2
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
+push this 3
+call Vaquero.borrar 1
+pop temp 0
+push this 3
+call Vaquero.dispose 1
+pop temp 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push local 1
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+pop this 3
+label IF_FALSE11
+label IF_FALSE10
+label IF_FALSE9
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function JuegoVaqueros.revisarChoques 0
+push argument 0
+pop pointer 0
+push pointer 0
+call JuegoVaqueros.revisarChoquesVaqueros 1
+pop temp 0
+push pointer 0
+call JuegoVaqueros.revisarChoquesBalas 1
+pop temp 0
+push constant 0
+return
+function JuegoVaqueros.moverBalas 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push constant 4
+lt
+not
+if-goto WHILE_END0
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.mover 1
+pop temp 0
+label IF_FALSE0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 5
+call Sys.wait 1
+pop temp 0
+push constant 0
+return
+function JuegoVaqueros.accionesVaquero1 1
+push argument 0
+pop pointer 0
+push argument 1
+push constant 87
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+call Vaquero.moverArriba 1
+pop temp 0
+label IF_FALSE0
+push argument 1
+push constant 83
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 0
+call Vaquero.moverAbajo 1
+pop temp 0
+label IF_FALSE1
+push argument 1
+push constant 65
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 0
+call Vaquero.moverIzq 1
+pop temp 0
+label IF_FALSE2
+push argument 1
+push constant 68
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 0
+call Vaquero.moverDer 1
+pop temp 0
+label IF_FALSE3
+push argument 1
+push constant 88
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 0
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+label IF_FALSE5
+push constant 0
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+push this 4
+add
+push this 0
+call Vaquero.disparoDerecha 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE4
+push argument 1
+push constant 90
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 0
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 0
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 0
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE7
+push constant 0
+push this 4
+add
+push this 0
+call Vaquero.disparoDerechaArriba 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE6
+push argument 1
+push constant 67
+eq
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push constant 0
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push constant 0
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 0
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE9
+push constant 0
+push this 4
+add
+push this 0
+call Vaquero.disparoDerechaAbajo 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE8
+push constant 0
+return
+function JuegoVaqueros.accionesVaquero2 1
+push argument 0
+pop pointer 0
+push argument 1
+push constant 84
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 1
+call Vaquero.moverArriba 1
+pop temp 0
+label IF_FALSE0
+push argument 1
+push constant 71
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 1
+call Vaquero.moverAbajo 1
+pop temp 0
+label IF_FALSE1
+push argument 1
+push constant 70
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 1
+call Vaquero.moverIzq 1
+pop temp 0
+label IF_FALSE2
+push argument 1
+push constant 72
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 1
+call Vaquero.moverDer 1
+pop temp 0
+label IF_FALSE3
+push argument 1
+push constant 66
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 1
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE5
+push constant 1
+push this 4
+add
+push this 1
+call Vaquero.disparoIzquierda 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE4
+push argument 1
+push constant 86
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 1
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE7
+push constant 1
+push this 4
+add
+push this 1
+call Vaquero.disparoIzquierdaArriba 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE6
+push argument 1
+push constant 78
+eq
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push constant 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push constant 1
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 1
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE9
+push constant 1
+push this 4
+add
+push this 1
+call Vaquero.disparoIzquierdaAbajo 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE8
+push constant 0
+return
+function JuegoVaqueros.accionesVaquero3 1
+push argument 0
+pop pointer 0
+push argument 1
+push constant 73
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 2
+call Vaquero.moverArriba 1
+pop temp 0
+label IF_FALSE0
+push argument 1
+push constant 75
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 2
+call Vaquero.moverAbajo 1
+pop temp 0
+label IF_FALSE1
+push argument 1
+push constant 74
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 2
+call Vaquero.moverIzq 1
+pop temp 0
+label IF_FALSE2
+push argument 1
+push constant 76
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 2
+call Vaquero.moverDer 1
+pop temp 0
+label IF_FALSE3
+push argument 1
+push constant 44
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 2
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 2
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 2
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE5
+push constant 2
+push this 4
+add
+push this 2
+call Vaquero.disparoAbajo 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE4
+push argument 1
+push constant 46
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 2
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 2
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 2
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE7
+push constant 2
+push this 4
+add
+push this 2
+call Vaquero.disparoDerechaAbajo 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE6
+push argument 1
+push constant 77
+eq
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push constant 2
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push constant 2
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 2
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE9
+push constant 2
+push this 4
+add
+push this 2
+call Vaquero.disparoIzquierdaAbajo 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE8
+push constant 0
+return
+function JuegoVaqueros.accionesVaquero4 1
+push argument 0
+pop pointer 0
+push argument 1
+push constant 131
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 3
+call Vaquero.moverArriba 1
+pop temp 0
+label IF_FALSE0
+push argument 1
+push constant 133
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 3
+call Vaquero.moverAbajo 1
+pop temp 0
+label IF_FALSE1
+push argument 1
+push constant 130
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 3
+call Vaquero.moverIzq 1
+pop temp 0
+label IF_FALSE2
+push argument 1
+push constant 132
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 3
+call Vaquero.moverDer 1
+pop temp 0
+label IF_FALSE3
+push argument 1
+push constant 135
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 3
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 3
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 3
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE5
+push constant 3
+push this 4
+add
+push this 3
+call Vaquero.disparoArriba 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE4
+push argument 1
+push constant 137
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 3
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 3
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 3
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE7
+push constant 3
+push this 4
+add
+push this 3
+call Vaquero.disparoDerechaArriba 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE6
+push argument 1
+push constant 139
+eq
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push constant 3
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+not
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push constant 3
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Bala.borrar 1
+pop temp 0
+push local 0
+call Bala.dispose 1
+pop temp 0
+push constant 3
+push this 4
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE9
+push constant 3
+push this 4
+add
+push this 3
+call Vaquero.disparoIzquierdaArriba 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+label IF_FALSE8
+push constant 0
+return
+function JuegoVaqueros.run 3
 push argument 0
 pop pointer 0
 push constant 0
@@ -44,6 +1243,86 @@ push local 1
 not
 not
 if-goto WHILE_END0
+push local 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+call Keyboard.keyPressed 0
+pop local 0
+push pointer 0
+call JuegoVaqueros.moverBalas 1
+pop temp 0
+push pointer 0
+call JuegoVaqueros.revisarChoques 1
+pop temp 0
+label IF_FALSE0
+push this 0
+push constant 0
+eq
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push local 0
+call JuegoVaqueros.accionesVaquero1 2
+pop temp 0
+label IF_FALSE1
+push this 1
+push constant 0
+eq
+not
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+push local 0
+call JuegoVaqueros.accionesVaquero2 2
+pop temp 0
+label IF_FALSE2
+push this 2
+push constant 0
+eq
+not
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+push local 0
+call JuegoVaqueros.accionesVaquero3 2
+pop temp 0
+label IF_FALSE3
+push this 3
+push constant 0
+eq
+not
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push pointer 0
+push local 0
+call JuegoVaqueros.accionesVaquero4 2
+pop temp 0
+label IF_FALSE4
+label WHILE_EXP1
+push local 0
+push constant 0
+eq
+not
+not
+if-goto WHILE_END1
+call Keyboard.keyPressed 0
+pop local 0
+push pointer 0
+call JuegoVaqueros.revisarChoques 1
+pop temp 0
+push pointer 0
+call JuegoVaqueros.moverBalas 1
+pop temp 0
+goto WHILE_EXP1
+label WHILE_END1
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0

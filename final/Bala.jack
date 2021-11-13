@@ -28,41 +28,41 @@ class Bala {
       return y;
    }
 
-   method void colision() {
-      if (direccion = 1) { 
-         let direccion = 2;
-         return;
-      }
-      if (direccion = 2) { 
-         let direccion = 1;
-         return;
-      }
-      if (direccion = 3) { 
-         let direccion = 4;
-         return;
-      }
-      if (direccion = 4) { 
-         let direccion = 3;
-         return;
-      }
-      if (direccion = 5) { 
-         let direccion = 8;
-         return;
-      }
-      if (direccion = 6) { 
-         let direccion = 7;
-         return;
-      }
-      if (direccion = 7) { 
-         let direccion = 6;
-         return;
-      }
-      if (direccion = 8) { 
-         let direccion = 5;
-         return;
-      }
-      return;
-   }
+   // method void colision() {
+   //    if (direccion = 1) { 
+   //       let direccion = 2;
+   //       return;
+   //    }
+   //    if (direccion = 2) { 
+   //       let direccion = 1;
+   //       return;
+   //    }
+   //    if (direccion = 3) { 
+   //       let direccion = 4;
+   //       return;
+   //    }
+   //    if (direccion = 4) { 
+   //       let direccion = 3;
+   //       return;
+   //    }
+   //    if (direccion = 5) { 
+   //       let direccion = 8;
+   //       return;
+   //    }
+   //    if (direccion = 6) { 
+   //       let direccion = 7;
+   //       return;
+   //    }
+   //    if (direccion = 7) { 
+   //       let direccion = 6;
+   //       return;
+   //    }
+   //    if (direccion = 8) { 
+   //       let direccion = 5;
+   //       return;
+   //    }
+   //    return;
+   // }
 
    method void mover() {
       if (direccion = 1) { do moverArriba(); }
@@ -88,7 +88,7 @@ class Bala {
       return answer;
    }
 
-   method boolean revisarChoque(Cuadrado otro) {
+   method boolean revisarChoque(Bala otro) {
       var boolean uno;
       var boolean dos;
       var boolean tres;
@@ -103,7 +103,23 @@ class Bala {
       let cuatro = esChoque(tempX + tamano, tempY + tamano);
       return (uno | dos | tres | cuatro) ;
    }
-   
+
+   method boolean revisarChoqueVaquero(Vaquero otro) {
+      var boolean uno;
+      var boolean dos;
+      var boolean tres;
+      var boolean cuatro;
+      var int tempX;
+      var int tempY;
+      let tempX = otro.getX();
+      let tempY = otro.getY();
+      let uno = esChoque(tempX + tamano, tempY);
+      let dos = esChoque(tempX, tempY + tamano);
+      let tres = esChoque(tempX, tempY);
+      let cuatro = esChoque(tempX + tamano, tempY + tamano);
+      return (uno | dos | tres | cuatro) ;
+   }
+
    method void rebote(int pared) {
       if (direccion = 1) { 
          let direccion = 2;
@@ -316,7 +332,7 @@ class Bala {
       if (((y + tamano) = 254) | ((y + tamano) > 254)) {
          do rebote(3);
       }
-      if (((x + tamano) = 510) | ((x + tamano) = 510)) {
+      if (((x + tamano) = 510) | ((x + tamano) > 510)) {
          do rebote(2);
       }
       return;

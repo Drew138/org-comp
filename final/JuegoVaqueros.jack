@@ -4,7 +4,7 @@ class JuegoVaqueros {
    field Vaquero vaquero2; // figura
    field Vaquero vaquero3; // figura
    field Vaquero vaquero4; // figura
-   field Bala[] balas; 
+   field Array balas; 
 
    constructor JuegoVaqueros new() {
       // crea un cuadrado de 30x30 en la esquina superior izquierda en la pantalla
@@ -37,18 +37,21 @@ class JuegoVaqueros {
             if ((~(balas[i] = null)) & (~(balas[j] = null))) {
                let balaUno = balas[i];
                let balaDos = balas[j];
-               let cond1 = balaUno.revisarChoque(cuadrado2);
-               let cond2 = balaDos.revisarChoque(cuadrado1);
+               let cond1 = balaUno.revisarChoque(balaDos);
+               let cond2 = balaDos.revisarChoque(balaUno);
                if (cond1 | cond2) {
-                     do balaUno.colision();
-                     do balaDos.colision();
+                     do balaUno.borrar();
+                     do balaDos.borrar();
+                     do balaUno.dispose();
+                     do balaDos.dispose();
+                     let balas[i] = null;
+                     let balas[j] = null;
                }
             }
             let j = j + 1;
          }
          let i = i + 1;
       }
-
       return;
    }
 
@@ -56,18 +59,75 @@ class JuegoVaqueros {
 
       var Bala bala;
       var int i;
+      var boolean esChoque;
       let i = 0;
       while (i < 4) {
          if (~(balas[i] = null)) {
             let bala = balas[i];
+            if (~(vaquero1 = null)) {
+               let esChoque = bala.revisarChoqueVaquero(vaquero1);
+               if (esChoque) {
+                  do vaquero1.borrar();
+                  do vaquero1.dispose();
+                  do bala.borrar();
+                  do bala.dispose();
+                  let balas[i] = null;
+                  let vaquero1 = null;
+               }
+            }
          }
+         if (~(balas[i] = null)) {
+            let bala = balas[i];
+            if (~(vaquero2 = null)) {
+               let esChoque = bala.revisarChoqueVaquero(vaquero2);
+               if (esChoque) {
+                  do vaquero2.borrar();
+                  do vaquero2.dispose();
+                  do bala.borrar();
+                  do bala.dispose();
+                  let balas[i] = null;
+                  let vaquero2 = null;
+               }
+            }
+         }
+
+         if (~(balas[i] = null)) {
+            let bala = balas[i];
+            if (~(vaquero3 = null)) {
+               let esChoque = bala.revisarChoqueVaquero(vaquero3);
+               if (esChoque) {
+                  do vaquero3.borrar();
+                  do vaquero3.dispose();
+                  do bala.borrar();
+                  do bala.dispose();
+                  let balas[i] = null;
+                  let vaquero3 = null;
+               }
+            }
+
+         }
+         if (~(balas[i] = null)) {
+            let bala = balas[i];
+            if (~(vaquero4 = null)) {
+               let esChoque = bala.revisarChoqueVaquero(vaquero4);
+               if (esChoque) {
+                  do vaquero4.borrar();
+                  do vaquero4.dispose();
+                  do bala.borrar();
+                  do bala.dispose();
+                  let balas[i] = null;
+                  let vaquero4 = null;
+               }
+            }
+         }
+         let i = i + 1;
       }
       return;
    }
 
    method void revisarChoques() {
-      revisarChoquesVaqueros();
-      revisarChoquesBalas();
+      do revisarChoquesVaqueros();
+      do revisarChoquesBalas();
       return;
    }
 
@@ -80,64 +140,203 @@ class JuegoVaqueros {
       while (i < 4) {
          if (~(balas[i] = null)) {
             let bala = balas[i];
-            bala.mover();
+            do bala.mover();
          }
+         let i = i + 1;
       }
       do Sys.wait(5);  // espera de siguientes acciones
+      return;
+   }
+
+   method void accionesVaquero1(int key) {
+      var Bala bala;
+      // do Output.printString("entered");
+      if (key = 87) { do vaquero1.moverArriba(); }   // tecla flecha arriba
+      if (key = 83) { do vaquero1.moverAbajo(); }   // tecla flecha abajo
+      if (key = 65) { do vaquero1.moverIzq(); }   // tecla izquierda
+      if (key = 68) { do vaquero1.moverDer(); }   // tecla derecha
+      if (key = 88) { 
+
+         if (~(balas[0] = null)) {
+            let bala = balas[0];
+            do bala.borrar();
+            do bala.dispose();
+         } 
+         let balas[0] = null;
+         let balas[0] = vaquero1.disparoDerecha(); // tecla derecha
+         return;
+      }   
+      if (key = 90) { 
+         if (~(balas[0] = null)) {
+            let bala = balas[0];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[0] = null;
+         } 
+         let balas[0] = vaquero1.disparoDerechaArriba(); // tecla derecha
+         return;
+      }   // tecla derecha
+      if (key = 67) { 
+         if (~(balas[0] = null)) {
+            let bala = balas[0];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[0] = null;
+         } 
+         let balas[0] = vaquero1.disparoDerechaAbajo(); // tecla derecha
+         return;
+      }   // tecla derecha
+      return;
+   }
+
+   method void accionesVaquero2(int key) {
+      var Bala bala;
+      if (key = 84) { do vaquero2.moverArriba(); }   // tecla flecha arriba
+      if (key = 71) { do vaquero2.moverAbajo(); }   // tecla flecha abajo
+      if (key = 70) { do vaquero2.moverIzq(); }   // tecla izquierda
+      if (key = 72) { do vaquero2.moverDer(); }   // tecla derecha
+      if (key = 66) { 
+         if (~(balas[1] = null)) {
+            let bala = balas[1];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[1] = null;
+         } 
+         let balas[1] = vaquero2.disparoIzquierda(); 
+         return;
+      }   // tecla derecha
+      if (key = 86) { 
+         if (~(balas[1] = null)) {
+            let bala = balas[1];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[1] = null;
+         } 
+         let balas[1] = vaquero2.disparoIzquierdaArriba(); 
+         return;
+      }   // tecla derecha
+      if (key = 78) { 
+         if (~(balas[1] = null)) {
+            let bala = balas[1];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[1] = null;
+         } 
+         let balas[1] = vaquero2.disparoIzquierdaAbajo(); 
+         return;
+      }   // tecla derecha
+      return;
+   }
+
+   method void accionesVaquero3(int key) {
+      var Bala bala;
+
+      if (key = 73) { do vaquero3.moverArriba(); }   // tecla flecha arriba
+      if (key = 75) { do vaquero3.moverAbajo(); }   // tecla flecha abajo
+      if (key = 74) { do vaquero3.moverIzq(); }   // tecla izquierda
+      if (key = 76) { do vaquero3.moverDer(); }   // tecla derecha
+      if (key = 44) { 
+         if (~(balas[2] = null)) {
+            let bala = balas[2];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[2] = null;
+         } 
+         let balas[2] = vaquero3.disparoAbajo(); 
+         return;
+      }   // tecla derecha
+      if (key = 46) { 
+         if (~(balas[2] = null)) {
+            let bala = balas[2];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[2] = null;
+         } 
+         let balas[2] = vaquero3.disparoDerechaAbajo(); 
+         return;
+      }   // tecla derecha
+      if (key = 77) { 
+         if (~(balas[2] = null)) {
+            let bala = balas[2];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[2] = null;
+         } 
+         let balas[2] = vaquero3.disparoIzquierdaAbajo(); 
+         return;
+      }   // tecla derecha
+      return;
+   }
+
+
+   method void accionesVaquero4(int key) {
+      var Bala bala;
+      if (key = 131) { do vaquero4.moverArriba(); }   // tecla flecha arriba
+      if (key = 133) { do vaquero4.moverAbajo(); }   // tecla flecha abajo
+      if (key = 130) { do vaquero4.moverIzq(); }   // tecla izquierda
+      if (key = 132) { do vaquero4.moverDer(); }   // tecla derecha
+      if (key = 135) { 
+         if (~(balas[3] = null)) {
+            let bala = balas[3];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[3] = null;
+         } 
+         let balas[3] = vaquero4.disparoArriba(); 
+         return;
+      }   // tecla derecha
+      if (key = 137) {
+         if (~(balas[3] = null)) {
+            let bala = balas[3];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[3] = null;
+         } 
+         let balas[3] = vaquero4.disparoDerechaArriba(); 
+         return;
+      }   // tecla derecha
+      if (key = 139) { 
+         if (~(balas[3] = null)) {
+            let bala = balas[3];
+            do bala.borrar();
+            do bala.dispose();
+            let balas[3] = null;
+         } 
+         let balas[3] = vaquero4.disparoIzquierdaArriba();
+         return;
+      }   // tecla derecha
       return;
    }
 
    method void run() {
       var char key;  // tecla presionada
       var boolean exit;
+      var Bala bala;
       let exit = false;
       
       while (~exit) {
          // ciclo espernado teclas
-         do moverCuadrado();
          if (key = 0) {
             let key = Keyboard.keyPressed();
-            do revisarChoques();
             do moverBalas();
+            do revisarChoques();
          }
-
-         if (key = 131) { do vaquero1.moverArriba(); }   // tecla flecha arriba
-         if (key = 133) { do vaquero1.moverAbajo(); }   // tecla flecha abajo
-         if (key = 130) { do vaquero1.moverIzq(); }   // tecla izquierda
-         if (key = 132) { do vaquero1.moverDer(); }   // tecla derecha
-         if (key = 132) { do vaquero1.disparoDerecha(); }   // tecla derecha
-         if (key = 132) { do vaquero1.disparoDerechaArriba(); }   // tecla derecha
-         if (key = 132) { do vaquero1.disparoDerechaAbajo(); }   // tecla derecha
-
-         if (key = 131) { do vaquero2.moverArriba(); }   // tecla flecha arriba
-         if (key = 133) { do vaquero2.moverAbajo(); }   // tecla flecha abajo
-         if (key = 130) { do vaquero2.moverIzq(); }   // tecla izquierda
-         if (key = 132) { do vaquero2.moverDer(); }   // tecla derecha
-         if (key = 132) { do vaquero2.disparoIzquierda(); }   // tecla derecha
-         if (key = 132) { do vaquero2.disparoIzquierdaArriba(); }   // tecla derecha
-         if (key = 132) { do vaquero2.disparoIzquierdaAbajo(); }   // tecla derecha
-
-         if (key = 131) { do vaquero3.moverArriba(); }   // tecla flecha arriba
-         if (key = 133) { do vaquero3.moverAbajo(); }   // tecla flecha abajo
-         if (key = 130) { do vaquero3.moverIzq(); }   // tecla izquierda
-         if (key = 132) { do vaquero3.moverDer(); }   // tecla derecha
-         if (key = 132) { do vaquero3.disparoAbajo(); }   // tecla derecha
-         if (key = 132) { do vaquero3.disparoDerechaAbajo(); }   // tecla derecha
-         if (key = 132) { do vaquero3.disparoIzquierdaAbajo(); }   // tecla derecha
-
-         if (key = 131) { do vaquero4.moverArriba(); }   // tecla flecha arriba
-         if (key = 133) { do vaquero4.moverAbajo(); }   // tecla flecha abajo
-         if (key = 130) { do vaquero4.moverIzq(); }   // tecla izquierda
-         if (key = 132) { do vaquero4.moverDer(); }   // tecla derecha
-         if (key = 132) { do vaquero4.disparoArriba(); }   // tecla derecha
-         if (key = 132) { do vaquero4.disparoDerechaArriba(); }   // tecla derecha
-         if (key = 132) { do vaquero4.disparoIzquierdaArriba(); }   // tecla derecha
-
-
+         if (~(vaquero1 = null)) {
+            do accionesVaquero1(key);
+         }
+         if (~(vaquero2 = null)) {
+            do accionesVaquero2(key);
+         }
+         if (~(vaquero3 = null)) {
+            do accionesVaquero3(key);
+         }
+         if (~(vaquero4 = null)) {
+            do accionesVaquero4(key);
+         }
          // Ciclo esperando liberar tecla para no hacer más funciones por error
          while (~(key = 0)) {
             let key = Keyboard.keyPressed();
-            dov revisarChoques();
+            do revisarChoques();
             do moverBalas();
          }
      } // while
